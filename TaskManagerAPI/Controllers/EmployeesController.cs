@@ -58,7 +58,7 @@ namespace TaskManagerAPI.Controllers
                 {
                     Employee user = new Employee();
                     user.FullName = model.FullName;
-                    user.EmailAddress = model.Email;
+                    user.Email = model.Email;
                     user.UserName = model.Email;
 
                     IdentityResult result = userManager.CreateAsync(user, model.Password).Result;
@@ -69,7 +69,7 @@ namespace TaskManagerAPI.Controllers
                         return Ok(new
                         {
                             fullName = user.FullName,
-                            email = user.EmailAddress,
+                            email = user.Email,
                         });
                     }
                     else
@@ -93,6 +93,38 @@ namespace TaskManagerAPI.Controllers
             return BadRequest();
         }
 
+        [HttpPost("signin")]
+        public async Task<IActionResult> SignIn([FromBody] LoginDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await this.userManager.FindByNameAsync(model.Email);
+                //var user = await this.userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    var passwordCheck = await this.signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+                    if (passwordCheck.Succeeded)
+                    {
+                        Response.Headers.Add("Authorization", JWTHelper.generateToken(user, this.config));
+                        return Ok(new
+                        {
+                            fullName = user.FullName,
+                            email = user.Email,
+                        });
+                    }
+                    else
+                    {
+                        return Unauthorized("Your password is incorrect.");
+                    }
+                }
+                else
+                {
+                    return NotFound("User not exist.");
+                }
+            }
+
+            return BadRequest();
+        }
     }
 }
 

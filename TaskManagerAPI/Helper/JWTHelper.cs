@@ -15,14 +15,14 @@ namespace BookStoreAPI.Helpers
         {
             var claims = new List<Claim>
                         {
-                            new Claim(JwtRegisteredClaimNames.Sub, user.EmailAddress),
+                            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                         };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
-                config["Tokens:Issuer"],
-                config["Tokens:Audience"],
+                config["Jwt:Issuer"],
+                config["Jwt:Audience"],
                 claims,
                 expires: DateTime.UtcNow.AddHours(3),
                 signingCredentials: credentials
