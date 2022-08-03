@@ -8,11 +8,12 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace TaskManagerAPI.Data
 {
-    public class EmployeeDbContext: DbContext
+    public class EmployeeDbContext : DbContext
     {
+        public EmployeeDbContext(DbContextOptions options) : base(options) {
+            Database.EnsureCreated();
+        }
         public DbSet<Employee> Employees { get; set; }
-
-        public EmployeeDbContext(DbContextOptions options) : base(options) { }
     }
 }
 
