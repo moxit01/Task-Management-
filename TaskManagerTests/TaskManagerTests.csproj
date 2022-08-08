@@ -12,10 +12,18 @@
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.7" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
     <PackageReference Include="coverlet.collector" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TaskManagerAPI\TaskManagerAPI.csproj" />
+    <ProjectReference Include="..\TaskManagerLibrary\TaskManagerLibrary.csproj" />
     <ProjectReference Include="..\TaskManager\TaskManger.csproj" />
+    <ProjectReference Include="..\TaskManagerAPI\TaskManagerAPI.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Microsoft.AspNetCore.Mvc.Testing" />
+  </ItemGroup>
+<ItemGroup>
+     <InternalsVisibleTo Include="TaskManagerTests" />
+</ItemGroup>
 </Project>

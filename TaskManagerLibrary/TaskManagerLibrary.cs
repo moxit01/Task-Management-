@@ -12,7 +12,7 @@ public class TaskManagerLibrary
 {
     private static readonly HttpClient client = new HttpClient();
 
-    public static async Task<String> SignUpRequest(Dictionary<string, string> values)
+    public static async Task<(int, String)> SignUpRequest(Dictionary<string, string> values)
     {
         //var content = new FormUrlEncodedContent(values);
 
@@ -23,10 +23,11 @@ public class TaskManagerLibrary
         HttpContent content = new StringContent(Serialized, Encoding.Unicode, "application/json");
 
         var response = await client.PostAsync(Constants.SignUpAPI, content);
+        var status = (int)response.StatusCode;
 
         var responseString = await response.Content.ReadAsStringAsync();
 
-        return responseString;
+        return (status, responseString);
     }
 
     public static async Task<String> SignInRequest(Dictionary<string, string> values)

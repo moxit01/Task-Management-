@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TaskManagerAPI.DTO;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -30,18 +29,15 @@ namespace TaskManagerAPI.Controllers
     [Route("api/[controller]")]
     public class EmployeesController : Controller
     {
-
-        private readonly ILogger<EmployeesController> logger;
         private readonly SignInManager<Employee> signInManager;
         private readonly UserManager<Employee> userManager;
         private readonly IConfiguration config;
 
-        public EmployeesController(ILogger<EmployeesController> logger,
+        public EmployeesController(
     SignInManager<Employee> signInManager,
     UserManager<Employee> userManager,
     IConfiguration config)
         {
-            this.logger = logger;
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.config = config;
