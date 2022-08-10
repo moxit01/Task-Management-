@@ -43,7 +43,7 @@ namespace TaskManagerAPI.Controllers
         {
             if (id != project.Id)
             {
-                return BadRequest("BookId and Id do not match.");
+                return BadRequest("Project Id and Id do not match.");
             }
 
             _context.Entry(project).State = EntityState.Modified;
@@ -56,7 +56,7 @@ namespace TaskManagerAPI.Controllers
             {
                 if (!ProjectExists(id))
                 {
-                    return NotFound("Book not found.");
+                    return NotFound("Project not found.");
                 }
                 else
                 {
@@ -65,6 +65,21 @@ namespace TaskManagerAPI.Controllers
             }
 
             return Ok(project);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProject(int id)
+        {
+            var project = await _context.Projects.FindAsync(id);
+            if (project == null)
+            {
+                return NotFound("Book not found.");
+            }
+
+            _context.Projects.Remove(project);
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
         private bool ProjectExists(int id)

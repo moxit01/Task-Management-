@@ -67,6 +67,21 @@ namespace TaskManagerAPI.Controllers
             return Ok(task);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTask(int id)
+        {
+            var task = await _context.Tasks.FindAsync(id);
+            if (task == null)
+            {
+                return NotFound("Book not found.");
+            }
+
+            _context.Tasks.Remove(task);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         private bool TaskExists(int id)
         {
             return _context.Projects.Any(e => e.Id == id);
@@ -74,5 +89,5 @@ namespace TaskManagerAPI.Controllers
 
     }
 }
-}
+
 
