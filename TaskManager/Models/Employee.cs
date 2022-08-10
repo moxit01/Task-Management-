@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TaskManger.Models
+namespace TaskManager.Models
 {
     public class Employee
     {
