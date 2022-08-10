@@ -20,8 +20,6 @@ builder.Services.AddSqlite<EmployeeDbContext>(connectionString);
 builder.Services.AddControllers();
 
 builder.Services.AddIdentity<EmployeeModel, IdentityRole>().AddEntityFrameworkStores<EmployeeDbContext>();
-builder.Services.AddIdentity<ProjectModel, IdentityRole>().AddEntityFrameworkStores<EmployeeDbContext>();
-builder.Services.AddIdentity<TaskModel, IdentityRole>().AddEntityFrameworkStores<EmployeeDbContext>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
