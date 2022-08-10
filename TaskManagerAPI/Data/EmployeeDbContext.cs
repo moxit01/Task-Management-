@@ -16,7 +16,7 @@ namespace TaskManagerAPI.Data
         }
         public DbSet<EmployeeModel> Employees { get; set; }
         public DbSet<ProjectModel> Projects { get; set; }
-        public DbSet<TaskModel> tasks { get; set; }
+        public DbSet<TaskModel> Tasks { get; set; }
     }
 }
 
