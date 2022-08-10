@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-namespace TaskManagerLibrary.Models
+namespace TaskManager.Models
 {
-    public class ProjectModel : IdentityUser
+    public class EmployeeProject 
     {
 
         [Key]
@@ -14,19 +14,21 @@ namespace TaskManagerLibrary.Models
         public string Name { get; set; } = String.Empty;
 
         [Required]
+        [Display(Name = "Description")]
+        public string Desc { get; set; } = String.Empty;
+
+        [Required]
         [DataType(DataType.Date)]
-        [EmailAddress]
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; } = DateTime.Now;
 
         [Required]
         [DataType(DataType.Date)]
-        [EmailAddress]
         [Display(Name = "End Date")]
         public DateTime EndDate { get; set; } = DateTime.Today;
 
         [Required]
-        public EmployeeModel[] Users { get; set; } = new EmployeeModel[10];
+        public Employee[] User { get; set; } = new Employee[10];
     }
 }
 

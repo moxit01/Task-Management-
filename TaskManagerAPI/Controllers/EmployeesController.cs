@@ -46,7 +46,7 @@ namespace TaskManagerAPI.Controllers
 
 
         [HttpPost("signup")]
-        public async Task<IActionResult> SignUp([FromBody] RegisterDto model)
+        public async Task<IActionResult> SignUp([FromBody] EmployeeModel model)
         {
             if (ModelState.IsValid)
             {
