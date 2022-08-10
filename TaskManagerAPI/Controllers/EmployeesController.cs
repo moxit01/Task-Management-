@@ -20,6 +20,7 @@ using System.Linq;
 using TaskManagerAPI.Models;
 using BookStoreAPI.Helpers;
 using System.Net;
+using TaskManagerLibrary.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -29,14 +30,14 @@ namespace TaskManagerAPI.Controllers
     [Route("api/[controller]")]
     public class EmployeesController : Controller
     {
-        private readonly SignInManager<Employee> signInManager;
-        private readonly UserManager<Employee> userManager;
+        private readonly SignInManager<EmployeeModel> signInManager;
+        private readonly UserManager<EmployeeModel> userManager;
         private readonly IConfiguration config;
 
         public EmployeesController(
-    SignInManager<Employee> signInManager,
-    UserManager<Employee> userManager,
-    IConfiguration config)
+        SignInManager<EmployeeModel> signInManager,
+        UserManager<EmployeeModel> userManager,
+        IConfiguration config)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
@@ -52,10 +53,12 @@ namespace TaskManagerAPI.Controllers
                 var existingUser = await this.userManager.FindByEmailAsync(model.Email);
                 if (existingUser == null)
                 {
-                    Employee user = new Employee();
-                    user.FullName = model.FullName;
-                    user.Email = model.Email;
-                    user.UserName = model.Email;
+                    EmployeeModel user = new EmployeeModel
+                    {
+                        FullName = model.FullName,
+                        Email = model.Email,
+                        UserName = model.Email
+                    };
 
                     IdentityResult result = userManager.CreateAsync(user, model.Password).Result;
 

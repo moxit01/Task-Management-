@@ -6,12 +6,13 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using TaskManagerAPI.Models;
+using TaskManagerLibrary.Models;
 
 namespace BookStoreAPI.Helpers
 {
     public static class JWTHelper
     {
-        public static string generateToken(Employee user, IConfiguration config)
+        public static string generateToken(EmployeeModel user, IConfiguration config)
         {
             var claims = new List<Claim>
                         {

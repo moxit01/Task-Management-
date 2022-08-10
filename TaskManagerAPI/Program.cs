@@ -7,6 +7,7 @@ using TaskManagerAPI.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TaskManagerLibrary.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,9 @@ builder.Services.AddSqlite<EmployeeDbContext>(connectionString);
 
 builder.Services.AddControllers();
 
-builder.Services.AddIdentity<Employee, IdentityRole>().AddEntityFrameworkStores<EmployeeDbContext>();
+builder.Services.AddIdentity<EmployeeModel, IdentityRole>().AddEntityFrameworkStores<EmployeeDbContext>();
+builder.Services.AddIdentity<ProjectModel, IdentityRole>().AddEntityFrameworkStores<EmployeeDbContext>();
+builder.Services.AddIdentity<TaskModel, IdentityRole>().AddEntityFrameworkStores<EmployeeDbContext>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
