@@ -17,7 +17,6 @@
     <None Remove="Microsoft.AspNet.WebApi.Client" />
     <None Remove="Microsoft.Extensions.Configuration.Json" />
     <None Remove="Swashbuckle.AspNetCore" />
-    <None Remove="Views\ProjectView\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -48,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
-    <Folder Include="Views\ProjectView\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskManagerLibrary\TaskManagerLibrary.csproj">
