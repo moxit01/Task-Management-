@@ -32,8 +32,6 @@ public class TaskManagerLibrary
 
     public static async Task<String> SignInRequest(Dictionary<string, string> values)
     {
-        //var content = new FormUrlEncodedContent(values);
-
         string Serialized = JsonConvert.SerializeObject(values);
 
         client.DefaultRequestHeaders.Clear();
@@ -41,6 +39,23 @@ public class TaskManagerLibrary
         HttpContent content = new StringContent(Serialized, Encoding.Unicode, "application/json");
 
         var response = await client.PostAsync(Constants.SignInAPI, content);
+
+        var responseString = await response.Content.ReadAsStringAsync();
+
+        Console.WriteLine(responseString);
+
+        return responseString;
+    }
+
+    public static async Task<String> CreateProjectRequest(Dictionary<string, string> values)
+    {
+        string Serialized = JsonConvert.SerializeObject(values);
+
+        client.DefaultRequestHeaders.Clear();
+        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        HttpContent content = new StringContent(Serialized, Encoding.Unicode, "application/json");
+
+        var response = await client.PostAsync(Constants.CreateProjectAPI, content);
 
         var responseString = await response.Content.ReadAsStringAsync();
 
