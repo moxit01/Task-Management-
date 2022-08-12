@@ -112,7 +112,7 @@ namespace TaskManger.Areas.Identity.Pages.Account
                     userObj.UserName = userObj.email;
                     userObj.Email = userObj.email;
 
-                    return RedirectToPage("./Project");
+                    return RedirectToAction("Project");
                 }
                 else
                 {
