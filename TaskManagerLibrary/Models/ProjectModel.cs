@@ -12,13 +12,17 @@ namespace TaskManagerLibrary.Models
         public string Name { get; set; } = String.Empty;
 
         [Required]
+        [Display(Name = "Poject Description")]
+        public string Desc { get; set; } = String.Empty;
+
+        [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Start Date")]
-        public DateTime StartDate { get; set; } = DateTime.Now;
+        public string StartDate { get; set; } = string.Empty;
 
         [DataType(DataType.Date)]
         [Display(Name = "End Date")]
-        public DateTime EndDate { get; set; } = DateTime.Today;
+        public string EndDate { get; set; } = string.Empty;
 
         [Required]
         public EmployeeModel[] Users { get; set; } = new EmployeeModel[10];

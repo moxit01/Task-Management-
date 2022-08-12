@@ -28,7 +28,7 @@ namespace TaskManagerAPI.Controllers
         }
 
         // POST api/values
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult<ProjectModel>> Post(ProjectModel project)
         {
             _context.Projects.Add(project);
@@ -67,7 +67,7 @@ namespace TaskManagerAPI.Controllers
             return Ok(project);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteProject(int id)
         {
             var project = await _context.Projects.FindAsync(id);

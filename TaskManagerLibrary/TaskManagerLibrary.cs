@@ -14,8 +14,6 @@ public class TaskManagerLibrary
 
     public static async Task<(int, String)> SignUpRequest(Dictionary<string, string> values)
     {
-        //var content = new FormUrlEncodedContent(values);
-
         string Serialized = JsonConvert.SerializeObject(values);
 
         client.DefaultRequestHeaders.Clear();
