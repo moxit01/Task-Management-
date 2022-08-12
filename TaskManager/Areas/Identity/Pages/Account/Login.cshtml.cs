@@ -6,25 +6,34 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using TaskManager.Models;
+using TaskManagerLibrary;
 
 namespace TaskManger.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly ILogger<RegisterModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(
+            UserManager<IdentityUser> userManager,
+            ILogger<RegisterModel> logger)
         {
-            _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -84,52 +93,30 @@ namespace TaskManger.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl)
-        {
-            if (!string.IsNullOrEmpty(ErrorMessage))
-            {
-                ModelState.AddModelError(string.Empty, ErrorMessage);
-            }
-
-            returnUrl = Url.Content("~/Home/Project");
-
-            // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            ReturnUrl = returnUrl;
-        }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl)
         {
-            returnUrl ??= Url.Content("~/Home/Project");
-
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
+                var values = new Dictionary<string, string>
                 {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
+                    { "email", Input.Email },
+                    { "password", Input.Password }
+                 };
+
+                var (status, responseString) = await LibraryClass.SignInRequest(values);
+
+                if (status == 200)
                 {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
+                    UserJson userObj = JsonSerializer.Deserialize<UserJson>(responseString);
+                    userObj.UserName = userObj.email;
+                    userObj.Email = userObj.email;
+
+                    return RedirectToPage("./Project");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
+                    //show api error
                 }
             }
 

@@ -73,7 +73,7 @@ namespace TaskManger.Areas.Identity.Pages.Account
                     { "password", Input.Password }
                  };
 
-                var (status, responseString) = await TaskManagerLibrary.TaskManagerLibrary.SignUpRequest(values);
+                var (status, responseString) = await LibraryClass.SignUpRequest(values);
 
                 if(status == 200)
                 {
@@ -81,19 +81,7 @@ namespace TaskManger.Areas.Identity.Pages.Account
                     userObj.UserName = userObj.email;
                     userObj.Email = userObj.email;
 
-                    IdentityResult result = _userManager.CreateAsync(userObj, Input.Password).Result;
-
-                    if (result.Succeeded)
-                    {
-                        //user saved in front end success
-                        //show dashboard
-                        return RedirectToPage("../CreateProject");
-                    }
-                    else
-                    {
-                        //failure
-                        //show local db error
-                    }
+                    return RedirectToPage("../CreateProject");
                 }
                 else
                 {
