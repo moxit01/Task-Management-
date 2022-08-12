@@ -50,10 +50,6 @@ namespace TaskManagerAPI.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("EmployeeId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -68,6 +64,11 @@ namespace TaskManagerAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedUserName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")

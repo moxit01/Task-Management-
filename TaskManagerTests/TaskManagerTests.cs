@@ -54,7 +54,7 @@ public class TaskManagerTests
     }
 
     [DataTestMethod]
-    [DataRow("name", "emaihjhjl@mail.in", "Qwer123#")]
+    [DataRow("name", "eaasdsdm@maasil.in", "Qwer123#")]
     public async Task TestEmailValidationSuccessAsync(string name, string email, string pass)
     {
         var values = new Dictionary<string, string>

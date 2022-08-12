@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using TaskManagerAPI.Data;
+using TaskManagerAPI.DTO;
 using TaskManagerLibrary.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -24,14 +26,35 @@ namespace TaskManagerAPI.Controllers
                                 .Include(p => p.Users) 
                                 .ToList();
 
-            return projects.FindAll(p => p.Users.Any(e => e.EmployeeId == id));
+            return projects.FindAll(p => p.Users.Any(e => e.Id == id));
         }
 
         // POST api/values
         [HttpPost("create")]
-        public async Task<ActionResult<ProjectModel>> Post(ProjectModel project)
+        public async Task<ActionResult<ProjectModel>> Post(ProjectDto project)
         {
-            _context.Projects.Add(project);
+            EmployeeModel[] employees = new EmployeeModel[10];
+
+            foreach (string id in project.Users)
+            {
+                EmployeeModel emp = new EmployeeModel
+                {
+                    Id = id
+                };
+
+                employees.Append(emp);
+            }
+
+            ProjectModel proj = new ProjectModel
+            {
+                Name = project.Name,
+                Desc = project.Desc,
+                StartDate = project.StartDate,
+                EndDate = project.EndDate,
+                Users = employees
+            };
+
+            _context.Projects.Add(proj);
             await _context.SaveChangesAsync();
 
             return Ok(project);

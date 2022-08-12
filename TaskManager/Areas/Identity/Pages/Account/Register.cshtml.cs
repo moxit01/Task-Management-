@@ -87,6 +87,7 @@ namespace TaskManger.Areas.Identity.Pages.Account
                     {
                         //user saved in front end success
                         //show dashboard
+                        return RedirectToPage("../CreateProject");
                     }
                     else
                     {
