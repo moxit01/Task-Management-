@@ -1,8 +1,29 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Models;
 
 namespace TaskManager.Controllers;
+
+//public class FromViewModel
+//{
+
+//    [Required]
+//    [Display(Name = "Project Name")]
+//    public string Name { get; set; }
+
+//    [Required]
+//    [Display(Name = "Description")]
+//    public string Desc { get; set; }
+
+//    [Required]
+//    [DataType(DataType.Date)]
+//    [Display(Name = "Start Date")]
+//    public DateTime StartDate { get; set; } = DateTime.Now;
+
+//}
+
+
 
 public class HomeController : Controller
 {
@@ -23,13 +44,8 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult CreateProject()
-    {
-        return View();
-    }
-
-    public IActionResult ProjectList()
-    {
+    public IActionResult Project()
+    {   
         return View();
     }
 
