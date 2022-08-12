@@ -17,7 +17,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
-using TaskManagerAPI.Models;
 using BookStoreAPI.Helpers;
 using System.Net;
 using TaskManagerLibrary.Models;

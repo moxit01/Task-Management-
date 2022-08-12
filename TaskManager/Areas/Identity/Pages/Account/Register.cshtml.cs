@@ -19,8 +19,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using TaskManager.Models;
 using TaskManagerLibrary;
-using TaskManagerLibrary.Models;
 
 namespace TaskManger.Areas.Identity.Pages.Account
 {
@@ -48,7 +48,7 @@ namespace TaskManger.Areas.Identity.Pages.Account
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [BindProperty]
-        public EmployeeModel Input { get; set; }
+        public Employee Input { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used

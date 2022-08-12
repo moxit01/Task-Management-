@@ -18,7 +18,7 @@ namespace TaskManagerAPI.Controllers
 
         // GET: api/values
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<ProjectModel>>> Get(int id)
+        public async Task<ActionResult<IEnumerable<ProjectModel>>> Get(string id)
         {
             List<ProjectModel> projects = _context.Projects
                                 .Include(p => p.Users) 
@@ -41,7 +41,7 @@ namespace TaskManagerAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, ProjectModel project)
         {
-            if (id != project.Id)
+            if (id != project.ProjectId)
             {
                 return BadRequest("Project Id and Id do not match.");
             }
@@ -84,7 +84,7 @@ namespace TaskManagerAPI.Controllers
 
         private bool ProjectExists(int id)
         {
-            return _context.Projects.Any(e => e.Id == id);
+            return _context.Projects.Any(e => e.ProjectId == id);
         }
 
     }

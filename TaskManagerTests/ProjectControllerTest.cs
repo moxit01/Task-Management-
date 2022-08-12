@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NuGet.Protocol.Core.Types;
 using TaskManagerAPI.Controllers;
-using TaskManagerAPI.Models;
 using TaskManger.Areas.Identity.Pages.Account;
 using System.Security.Claims;
 using System.Text;
@@ -21,7 +20,6 @@ using System.Web.Http.Results;
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http;
 using System.Xml.Linq;
-using System.Net.Http.Headers;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ProjectControllerTests;
@@ -33,14 +31,47 @@ namespace ProjectControllerTests;
 public class ProjectControllerTests
 {
 
+    private HttpClient _httpClient;
+
+    public ProjectControllerTests()
+    {
+        var webAppFactory = new WebApplicationFactory<Program>();
+        _httpClient = webAppFactory.CreateDefaultClient();
+    }
+
+    [DataTestMethod]
+    [DataRow("Task Management", "This is test project for task management", "2022-10-01", "2022-12-01", new string[] { ""})]
+    public async Task TestCreateProjectAsync(string name, string desc, string start, string end, string[] users)
+    {
+
+        var values = new Dictionary<string, object>
+                {
+                    { "Name", name },
+                    { "Desc", desc },
+                    { "StartDate", start },
+                    { "EndDate", end},
+                    { "users", users}
+                 };
+        string Serialized = JsonConvert.SerializeObject(values);
+
+        _httpClient.DefaultRequestHeaders.Clear();
+        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        HttpContent content = new StringContent(Serialized, Encoding.Unicode, "application/json");
+
+        var response = await _httpClient.PostAsync(Constants.SignUpAPI, content);
+        var status = (int)response.StatusCode;
+
+        Assert.AreNotEqual(200, status);
+    }
 
     [TestMethod]
-    public void GetProjectNotFound()
+    [DataRow("")]
+    public void GetProjectNotFound(string project)
     {
         var controller = new ProjectController();
 
 
-        var response = controller.Get(1);
+        var response = controller.Get(project);
 
         Assert.IsInstanceOfType(response, typeof(Microsoft.AspNetCore.Mvc.NotFoundResult));
 

@@ -24,7 +24,7 @@ namespace TaskManagerAPI.Controllers
                                 .Include(t => t.Project)
                                 .ToList();
 
-            return tasks.FindAll(t => t.Project.Id == id);
+            return tasks.FindAll(t => t.Project.ProjectId == id);
         }
 
         // POST api/values
@@ -41,7 +41,7 @@ namespace TaskManagerAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, TaskModel task)
         {
-            if (id != task.Id)
+            if (id != task.TaskId)
             {
                 return BadRequest("TaskId and Id do not match.");
             }
@@ -84,7 +84,7 @@ namespace TaskManagerAPI.Controllers
 
         private bool TaskExists(int id)
         {
-            return _context.Projects.Any(e => e.Id == id);
+            return _context.Tasks.Any(e => e.TaskId == id);
         }
 
     }

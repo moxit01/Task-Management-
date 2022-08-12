@@ -1,11 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace TaskManagerLibrary.Models
 {
     public class ProjectModel
     {
-        [Key]
-        public int Id { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column(Order = 0)]
+        public int ProjectId { get; set; }
 
         [Required]
         [Display(Name = "Project Name")]

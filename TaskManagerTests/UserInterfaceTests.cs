@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NuGet.Protocol.Core.Types;
 using TaskManagerAPI.Controllers;
-using TaskManagerAPI.Models;
 using TaskManger.Areas.Identity.Pages.Account;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
@@ -31,7 +30,7 @@ public class UserInterfaceTests
     public void Startup()
     {
         new DriverManager().SetUpDriver(new ChromeConfig());
-        _driver = new SafariDriver();
+        _driver = new ChromeDriver();
     }
 
 
@@ -40,7 +39,8 @@ public class UserInterfaceTests
     {
         _driver.Navigate().GoToUrl("https://localhost:5001/Identity/Account/Login");
         Assert.AreEqual("Log in", _driver.Title);
-        Assert.IsTrue(_driver.Title.Contains("Log in"));
+
+        _driver.Quit();
     }
 
 
@@ -49,7 +49,8 @@ public class UserInterfaceTests
     {
         _driver.Navigate().GoToUrl("https://localhost:5001/Identity/Account/Register");
         Assert.AreEqual("Regsiter", _driver.Title);
-        Assert.IsTrue(_driver.Title.Contains("Register"));
+
+        _driver.Quit();
     }
 
 

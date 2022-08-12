@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using TaskManagerAPI.Models;
 using TaskManagerLibrary.Models;
 
 namespace BookStoreAPI.Helpers

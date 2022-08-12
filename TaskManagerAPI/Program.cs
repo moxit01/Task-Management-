@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Configuration;
 using Microsoft.OpenApi.Models;
 using TaskManagerAPI.Data;
-using TaskManagerAPI.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;

@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NuGet.Protocol.Core.Types;
 using TaskManagerAPI.Controllers;
-using TaskManagerAPI.Models;
 using TaskManger.Areas.Identity.Pages.Account;
 using System.Security.Claims;
 using System.Text;
@@ -55,7 +54,7 @@ public class TaskManagerTests
     }
 
     [DataTestMethod]
-    [DataRow("name", "email@mail.in", "Qwer123#")]
+    [DataRow("name", "emaihjhjl@mail.in", "Qwer123#")]
     public async Task TestEmailValidationSuccessAsync(string name, string email, string pass)
     {
         var values = new Dictionary<string, string>

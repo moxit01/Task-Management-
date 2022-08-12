@@ -1,11 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace TaskManagerLibrary.Models
 {
-    public class TaskModel
+    public class TaskModel: IdentityUser
     {
-        [Key]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column(Order = 0)]
+        public int TaskId { get; set; }
 
         [Required]
         [Display(Name = "Task Name")]
@@ -22,10 +25,10 @@ namespace TaskManagerLibrary.Models
         public string EndDate { get; set; } = String.Empty;
 
         [Required]
-        public EmployeeModel User { get; set; } = new EmployeeModel();
+        public EmployeeModel User { get; set; }
 
         [Required]
-        public ProjectModel Project { get; set; } = new ProjectModel();
+        public ProjectModel Project { get; set; }
     }
 }
 
