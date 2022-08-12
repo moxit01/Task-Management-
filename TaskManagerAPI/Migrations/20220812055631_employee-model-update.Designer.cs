@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskManagerAPI.Data;
 
@@ -10,22 +11,23 @@ using TaskManagerAPI.Data;
 namespace TaskManagerAPI.Migrations
 {
     [DbContext(typeof(EmployeeDbContext))]
-    partial class EmployeeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220812055631_employee-model-update")]
+    partial class employeemodelupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.7");
 
             modelBuilder.Entity("EmployeeModelProjectModel", b =>
                 {
-                    b.Property<string>("UsersId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("UsersEmployeeId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("projectsProjectId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("UsersId", "projectsProjectId");
+                    b.HasKey("UsersEmployeeId", "projectsProjectId");
 
                     b.HasIndex("projectsProjectId");
 
@@ -34,8 +36,10 @@ namespace TaskManagerAPI.Migrations
 
             modelBuilder.Entity("TaskManagerLibrary.Models.EmployeeModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("EmployeeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnOrder(0);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
@@ -54,6 +58,9 @@ namespace TaskManagerAPI.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -64,11 +71,6 @@ namespace TaskManagerAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
@@ -89,7 +91,7 @@ namespace TaskManagerAPI.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("EmployeeId");
 
                     b.ToTable("Employees");
                 });
@@ -186,9 +188,8 @@ namespace TaskManagerAPI.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("UserEmployeeId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
                         .HasColumnType("TEXT");
@@ -197,7 +198,7 @@ namespace TaskManagerAPI.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserEmployeeId");
 
                     b.ToTable("Tasks");
                 });
@@ -206,7 +207,7 @@ namespace TaskManagerAPI.Migrations
                 {
                     b.HasOne("TaskManagerLibrary.Models.EmployeeModel", null)
                         .WithMany()
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UsersEmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -227,7 +228,7 @@ namespace TaskManagerAPI.Migrations
 
                     b.HasOne("TaskManagerLibrary.Models.EmployeeModel", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserEmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
