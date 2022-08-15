@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Formatting;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json.Linq;
 
 namespace TaskManagerLibrary
 {
@@ -14,7 +16,7 @@ namespace TaskManagerLibrary
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public static async Task<(int, String)> SignUpRequest(Dictionary<string, string> values)
+        public static async Task<(int, String, string)> SignUpRequest(Dictionary<string, string> values)
         {
             string Serialized = JsonConvert.SerializeObject(values);
 
@@ -27,10 +29,13 @@ namespace TaskManagerLibrary
 
             var responseString = await response.Content.ReadAsStringAsync();
 
-            return (status, responseString);
+            JObject jsonResult = response.Content.ReadAsAsync<JObject>().Result;
+            string auth0MgtToken = jsonResult.Value<string>("Authorization");
+
+            return (status, responseString, auth0MgtToken);
         }
 
-        public static async Task<(int, String)> SignInRequest(Dictionary<string, string> values)
+        public static async Task<(int, String, string)> SignInRequest(Dictionary<string, string> values)
         {
             string Serialized = JsonConvert.SerializeObject(values);
 
@@ -43,9 +48,10 @@ namespace TaskManagerLibrary
             var responseString = await response.Content.ReadAsStringAsync();
             var status = (int)response.StatusCode;
 
-            Console.WriteLine(responseString);
+            JObject jsonResult = response.Content.ReadAsAsync<JObject>().Result;
+            string auth0MgtToken = jsonResult.Value<string>("Authorization");
 
-            return (status, responseString);
+            return (status, responseString, auth0MgtToken);
         }
 
         //public static async Task<String> CreateProjectRequest(Dictionary<string, string> values)

@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using TaskManager.Models;
 using TaskManagerLibrary;
+using TaskManger.Areas.Identity.Data;
 
 namespace TaskManger.Areas.Identity.Pages.Account
 {
@@ -96,6 +97,7 @@ namespace TaskManger.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl)
         {
+
             if (ModelState.IsValid)
             {
                 var values = new Dictionary<string, string>
@@ -104,13 +106,16 @@ namespace TaskManger.Areas.Identity.Pages.Account
                     { "password", Input.Password }
                  };
 
-                var (status, responseString) = await LibraryClass.SignInRequest(values);
+                var (status, responseString, token) = await LibraryClass.SignUpRequest(values);
 
                 if (status == 200)
                 {
                     UserJson userObj = JsonSerializer.Deserialize<UserJson>(responseString);
                     userObj.UserName = userObj.email;
                     userObj.Email = userObj.email;
+
+                    Globals.user = userObj;
+                    Globals.AuthToken = token;
 
                     return RedirectToPage("./Project");
                 }
@@ -120,7 +125,7 @@ namespace TaskManger.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            //// If we got this far, something failed, redisplay form
             return Page();
         }
     }

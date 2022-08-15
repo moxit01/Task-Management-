@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.AspNetCore.Authorization;
+using System.Net;
+using System.Security.Claims;
 using TaskManagerAPI.Data;
 using TaskManagerAPI.DTO;
 using TaskManagerLibrary.Models;
@@ -19,6 +22,7 @@ namespace TaskManagerAPI.Controllers
         private readonly EmployeeDbContext _context;
 
         // GET: api/values
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<ProjectModel>>> Get(string id)
         {
@@ -30,6 +34,7 @@ namespace TaskManagerAPI.Controllers
         }
 
         // POST api/values
+        [Authorize]
         [HttpPost("create")]
         public async Task<ActionResult<ProjectModel>> Post(ProjectDto project)
         {
@@ -61,6 +66,7 @@ namespace TaskManagerAPI.Controllers
         }
 
         // PUT api/values/5
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, ProjectModel project)
         {
@@ -90,6 +96,7 @@ namespace TaskManagerAPI.Controllers
             return Ok(project);
         }
 
+        [Authorize]
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteProject(int id)
         {
@@ -110,6 +117,10 @@ namespace TaskManagerAPI.Controllers
             return _context.Projects.Any(e => e.ProjectId == id);
         }
 
+        private string GetUserId()
+        {
+            return ((ClaimsIdentity)EmployeeModel.Identity).Claims.FirstOrDefault().Value;
+        }
     }
 }
 

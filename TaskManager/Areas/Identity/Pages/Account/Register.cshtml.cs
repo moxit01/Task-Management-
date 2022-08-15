@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using TaskManager.Models;
 using TaskManagerLibrary;
+using TaskManger.Areas.Identity.Data;
 
 namespace TaskManger.Areas.Identity.Pages.Account
 {
@@ -80,6 +81,8 @@ namespace TaskManger.Areas.Identity.Pages.Account
                     UserJson userObj = JsonSerializer.Deserialize<UserJson>(responseString);
                     userObj.UserName = userObj.email;
                     userObj.Email = userObj.email;
+
+                    Globals.user = userObj;
 
                     return RedirectToPage("../CreateProject");
                 }

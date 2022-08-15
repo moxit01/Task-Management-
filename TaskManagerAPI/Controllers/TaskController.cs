@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Net;
+using System.Security.Claims;
 using TaskManagerAPI.Data;
 using TaskManagerLibrary.Models;
 
@@ -17,6 +21,7 @@ namespace TaskManagerAPI.Controllers
         private readonly EmployeeDbContext _context;
 
         // GET: api/values
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<TaskModel>>> Get(int id)
         {
@@ -28,6 +33,7 @@ namespace TaskManagerAPI.Controllers
         }
 
         // POST api/values
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<TaskModel>> Post(TaskModel task)
         {
@@ -38,6 +44,7 @@ namespace TaskManagerAPI.Controllers
         }
 
         // PUT api/values/5
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, TaskModel task)
         {
@@ -67,6 +74,7 @@ namespace TaskManagerAPI.Controllers
             return Ok(task);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
