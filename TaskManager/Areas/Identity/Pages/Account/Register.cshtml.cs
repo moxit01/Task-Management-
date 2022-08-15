@@ -74,7 +74,7 @@ namespace TaskManger.Areas.Identity.Pages.Account
                     { "password", Input.Password }
                  };
 
-                var (status, responseString) = await LibraryClass.SignUpRequest(values);
+                var (status, responseString, token) = await LibraryClass.SignUpRequest(values);
 
                 if(status == 200)
                 {
@@ -83,6 +83,7 @@ namespace TaskManger.Areas.Identity.Pages.Account
                     userObj.Email = userObj.email;
 
                     Globals.user = userObj;
+                    Globals.AuthToken = token;
 
                     return RedirectToPage("../CreateProject");
                 }

@@ -117,7 +117,7 @@ namespace TaskManger.Areas.Identity.Pages.Account
                     Globals.user = userObj;
                     Globals.AuthToken = token;
 
-                    return RedirectToPage("./Project");
+                    return RedirectToAction("Project");
                 }
                 else
                 {
