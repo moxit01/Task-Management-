@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NuGet.Protocol.Core.Types;
 using TaskManagerAPI.Controllers;
-using TaskManger.Areas.Identity.Pages.Account;
+using ProjectPages.Areas.Identity.Pages.Account;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using TaskManagerLibrary;
