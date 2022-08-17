@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using ProjectPages.Models;
 using TaskManagerLibrary;
-using TaskManger.Areas.Identity.Data;
+using ProjectPages.Areas.Identity.Data;
 
 
 namespace ProjectPages.Areas.Identity.Pages.Account
@@ -115,14 +115,14 @@ namespace ProjectPages.Areas.Identity.Pages.Account
                     userObj.UserName = userObj.email;
                     userObj.Email = userObj.email;
 
-<<<<<<< Updated upstream:TaskManager/Areas/Identity/Pages/Account/Login.cshtml.cs
+
                     Globals.user = userObj;
                     Globals.AuthToken = token;
 
                     return RedirectToAction("Project");
-=======
+
                     return RedirectToPage("Project");
->>>>>>> Stashed changes:ProjectPages/Areas/Identity/Pages/Account/Login.cshtml.cs
+
                 }
                 else
                 {

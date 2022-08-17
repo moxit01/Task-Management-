@@ -1,7 +1,7 @@
 ﻿using System;
-using TaskManger.Areas.Identity.Pages.Account;
+using ProjectPages.Areas.Identity.Pages.Account;
 
-namespace TaskManger.Areas.Identity.Data
+namespace ProjectPages.Areas.Identity.Data
 {
 
     public static class Globals

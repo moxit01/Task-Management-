@@ -16,6 +16,7 @@
     <None Remove="Microsoft.AspNet.WebApi.Client" />
     <None Remove="Microsoft.Extensions.Configuration.Json" />
     <None Remove="Swashbuckle.AspNetCore" />
+    <None Remove="Areas\Identity\Data\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -54,5 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\css\" />
+    <Folder Include="Areas\Identity\Data\" />
   </ItemGroup>
 </Project>

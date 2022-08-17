@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using ProjectPages.Models;
 using TaskManagerLibrary;
-using TaskManger.Areas.Identity.Data;
+using ProjectPages.Areas.Identity.Data;
 
 
 namespace ProjectPages.Areas.Identity.Pages.Account
