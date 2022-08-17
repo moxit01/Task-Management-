@@ -107,7 +107,7 @@ namespace ProjectPages.Areas.Identity.Pages.Account
                     { "password", Input.Password }
                  };
 
-                var (status, responseString, token) = await LibraryClass.SignUpRequest(values);
+                var (status, responseString, token) = await LibraryClass.SignInRequest(values);
 
                 if (status == 200)
                 {
@@ -119,7 +119,7 @@ namespace ProjectPages.Areas.Identity.Pages.Account
                     Globals.user = userObj;
                     Globals.AuthToken = token;
 
-                    return RedirectToAction("Project");
+                    
 
                     return RedirectToPage("Project");
 

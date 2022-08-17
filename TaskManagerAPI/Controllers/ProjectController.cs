@@ -117,10 +117,10 @@ namespace TaskManagerAPI.Controllers
             return _context.Projects.Any(e => e.ProjectId == id);
         }
 
-        private string GetUserId()
-        {
-            return ((ClaimsIdentity)EmployeeModel.Identity).Claims.FirstOrDefault().Value;
-        }
+        //private string GetUserId()
+        //{
+        //    return ((ClaimsIdentity)EmployeeModel.Identity).Claims.FirstOrDefault().Value;
+        //}
     }
 }
 

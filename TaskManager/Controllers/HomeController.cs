@@ -3,7 +3,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ProjectPages.Models;
 
-namespace ProjectPages.Controllers;
+
+namespace TaskManager.Controllers;
 
 
 public class HomeController : Controller
