@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using TaskManager.Models;
+using ProjectPages.Models;
 
-namespace TaskManager.Controllers;
+namespace ProjectPages.Controllers;
 
 
 public class HomeController : Controller

@@ -12,7 +12,6 @@
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration" />
     <None Remove="Microsoft.VisualStudio.Web.CodeGenerators.Mvc" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
-    <None Remove="Images\" />
     <None Remove="System.Net.Http" />
     <None Remove="Microsoft.AspNet.WebApi.Client" />
     <None Remove="Microsoft.Extensions.Configuration.Json" />
@@ -46,11 +45,14 @@
     <Compile Remove="Data\Migrations\ApplicationDbContextModelSnapshot.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TaskManagerLibrary\TaskManagerLibrary.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\css\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 </Project>
