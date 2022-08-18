@@ -94,7 +94,7 @@ namespace ProjectPages.Areas.Project
                     { "Users", selectedUserIds }
                  };
 
-            var (status, responseString) = await LibraryClass.CreateProjectRequest(values);
+            var (status, responseString) = await LibraryClass.CreateProjectRequest(values, Globals.AuthToken);
 
             if (status == 200)
             {

@@ -14,35 +14,35 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ProjectModel.Name" class="control-label">Name</label>
+                <label asp-for="Input.Name" class="control-label">Name</label>
             </div>
             <div class="form-group">
-                <input asp-for="ProjectModel.Name" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
+                <input asp-for="Input.Name" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
                 <span asp-validation-for="ProjectModel.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectModel.Desc" class="control-label">Description</label>
+                <label asp-for="Input.Desc" class="control-label">Description</label>
             </div>
             <div class="form-group">
-                <input asp-for="ProjectModel.Desc" class="form-control" aria-required="true" style="font-size:18pt;height:300px;width:400px;" />
+                <input asp-for="Input.Desc" class="form-control" aria-required="true" style="font-size:18pt;height:300px;width:400px;" />
                 <span asp-validation-for="ProjectModel.Desc" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectModel.StartDate" class="control-label">Start Date</label>
+                <label asp-for="Input.StartDate" class="control-label">Start Date</label>
             </div>
             <div class="form-group">
-                <input asp-for="ProjectModel.StartDate" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
+                <input asp-for="Input.StartDate" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
                 <span asp-validation-for="ProjectModel.StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectModel.EndDate" class="control-label">End Date</label>
+                <label asp-for="Input.EndDate" class="control-label">End Date</label>
             </div>
             <div class="form-group">
-                <input asp-for="ProjectModel.EndDate" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
-                <span asp-validation-for="ProjectModel.EndDate" class="text-danger"></span>
+                <input asp-for="Input.EndDate" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
+                <span asp-validation-for="Input.EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectModel.Users" class="control-label">Select employees</label>
+                <label asp-for="Input.Users" class="control-label">Select employees</label>
             </div>
             <div class="form-group">
                 @{

@@ -65,15 +65,30 @@ namespace TaskManagerLibrary
             return (404, responseString, "");
         }
 
-        public static async Task<(int, String)> CreateProjectRequest(Dictionary<string, object> values)
+        public static async Task<(int, String)> CreateProjectRequest(Dictionary<string, object> values, string token)
         {
             string Serialized = JsonConvert.SerializeObject(values);
 
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpContent content = new StringContent(Serialized, Encoding.Unicode, "application/json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var response = await client.PostAsync(Constants.CreateProjectAPI, content);
+            var status = (int)response.StatusCode;
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            return (status, responseString);
+        }
+
+        public static async Task<(int, string)> GetAllProjects(string token, string id)
+        {
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await client.GetAsync(Constants.CreateProjectAPI + id);
             var status = (int)response.StatusCode;
 
             var responseString = await response.Content.ReadAsStringAsync();
