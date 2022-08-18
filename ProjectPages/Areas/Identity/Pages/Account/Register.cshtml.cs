@@ -86,7 +86,7 @@ namespace ProjectPages.Areas.Identity.Pages.Account
                     Globals.user = userObj;
                     Globals.AuthToken = token;
 
-                    return RedirectToPage("../CreateProject");
+                    return RedirectToPage("Pages/Project");
                 }
                 else
                 {

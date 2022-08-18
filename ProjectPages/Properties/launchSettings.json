@@ -11,7 +11,7 @@
     "ProjectPages": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:36530",
+      "applicationUrl": "http://localhost:18064",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

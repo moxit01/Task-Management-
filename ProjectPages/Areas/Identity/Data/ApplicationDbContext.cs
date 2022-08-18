@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProjectPages.Models;
-
+using TaskManagerLibrary.Models;
 
 namespace ProjectPages.Data;
 
@@ -27,5 +27,5 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 
     public DbSet<Employee> Employees  => Set<Employee>();
     public DbSet<EmployeeProject> Projects => Set<EmployeeProject>();
-   //public DbSet<TaskModel> Tasks { get; set; }
+    public DbSet<TaskModel> Tasks { get; set; }
 }

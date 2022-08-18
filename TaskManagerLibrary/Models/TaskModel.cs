@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TaskManagerLibrary.Models
 {
-    public class TaskModel: IdentityUser
+    public class TaskModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
@@ -13,6 +13,10 @@ namespace TaskManagerLibrary.Models
         [Required]
         [Display(Name = "Task Name")]
         public string Name { get; set; } = String.Empty;
+
+        [Required]
+        [Display(Name = "Task Details")]
+        public string Details { get; set; } = String.Empty;
 
         [Required]
         [DataType(DataType.Date)]
@@ -25,6 +29,7 @@ namespace TaskManagerLibrary.Models
         public string EndDate { get; set; } = String.Empty;
 
         [Required]
+        [Display(Name = "User")]
         public EmployeeModel User { get; set; }
 
         [Required]
