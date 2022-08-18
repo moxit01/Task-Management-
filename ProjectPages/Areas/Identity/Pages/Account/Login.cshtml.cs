@@ -119,7 +119,7 @@ namespace ProjectPages.Areas.Identity.Pages.Account
                     Globals.user = userObj;
                     Globals.AuthToken = token;
 
-                    return RedirectToPage("/Create", new { area = "Tasks" });
+                    return RedirectToPage("/Create", new { area = "Projects" });
                 }
                 else
                 {

@@ -28,4 +28,5 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     public DbSet<Employee> Employees  => Set<Employee>();
     public DbSet<EmployeeProject> Projects => Set<EmployeeProject>();
     public DbSet<TaskModel> Tasks { get; set; }
+    public DbSet<TaskManagerLibrary.Models.ProjectModel>? ProjectModel { get; set; }
 }

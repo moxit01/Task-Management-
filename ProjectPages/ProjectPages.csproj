@@ -26,6 +26,7 @@
     <None Remove="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
     <None Remove="Areas\Tasks\" />
     <None Remove="Areas\Tasks\Pages\" />
+    <None Remove="Areas\Projects\Pages\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\" />
@@ -34,6 +35,7 @@
     <Folder Include="Images\" />
     <Folder Include="Areas\Tasks\" />
     <Folder Include="Areas\Tasks\Pages\" />
+    <Folder Include="Areas\Projects\Pages\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Pages\Privacy.cshtml.cs" />
