@@ -30,7 +30,12 @@ namespace TaskManagerAPI.Controllers
                                 .Include(p => p.Users) 
                                 .ToList();
 
-            return projects.FindAll(p => p.Users.Any(e => e.Id == id));
+            var proj = projects.FindAll(p => p.Users.Any(e => e.Id == id));
+
+            return Ok(new
+            {
+                projects = proj
+            });
         }
 
         // POST api/values

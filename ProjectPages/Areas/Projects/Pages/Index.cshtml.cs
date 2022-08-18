@@ -29,14 +29,14 @@ namespace ProjectPages.Areas.Project
             public ProjectJson[] Projects { get; set; }
         }
 
+        public ProjectJson[] projects;
+
         private readonly ProjectPages.Data.ApplicationDbContext _context;
 
         public IndexModel(ProjectPages.Data.ApplicationDbContext context)
         {
             _context = context;
         }
-
-        public IList<ProjectModel> ProjectList { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
@@ -45,7 +45,9 @@ namespace ProjectPages.Areas.Project
             if (status == 200)
             {
                 var obj = JsonConvert.DeserializeObject<ProjectModel>(responseString);
-                ProjectList = JsonSerializer.Deserialize<ProjectModel>(responseString);
+                var projectList = Newtonsoft.Json.JsonConvert.DeserializeObject<ProjectList>(responseString);
+
+                projects = projectList.Projects;
             }
         }
     }
