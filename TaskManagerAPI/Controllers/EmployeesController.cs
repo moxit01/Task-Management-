@@ -12,9 +12,6 @@ using TaskManagerAPI.DTO;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using BookStoreAPI.Helpers;
@@ -22,13 +19,14 @@ using System.Net;
 using TaskManagerLibrary.Models;
 using TaskManagerAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TaskManagerAPI.Controllers
 {
 
-    [Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
     public class EmployeesController : Controller
     {
         private readonly ILogger<EmployeesController> logger;
@@ -134,12 +132,16 @@ namespace TaskManagerAPI.Controllers
             return BadRequest();
         }
 
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpGet("users")]
         public IActionResult GetUsers()
         {
             var users = _context.Employees.Select(u => new { Id = u.Id, FullName = u.FullName });
 
-            return Ok(users);
+            return Ok(new
+            {
+                users = users
+            });
         }
     }
 }

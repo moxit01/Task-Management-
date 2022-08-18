@@ -21,9 +21,9 @@ namespace TaskManagerAPI.Controllers
         private readonly EmployeeDbContext _context;
 
         // GET: api/values
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<TaskModel>>> Get(int id)
+        public ActionResult<IEnumerable<TaskModel>> Get(int id)
         {
             List<TaskModel> tasks = _context.Tasks
                                 .Include(t => t.Project)
@@ -33,7 +33,7 @@ namespace TaskManagerAPI.Controllers
         }
 
         // POST api/values
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpPost]
         public async Task<ActionResult<TaskModel>> Post(TaskModel task)
         {
@@ -44,7 +44,7 @@ namespace TaskManagerAPI.Controllers
         }
 
         // PUT api/values/5
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, TaskModel task)
         {
@@ -74,7 +74,7 @@ namespace TaskManagerAPI.Controllers
             return Ok(task);
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {

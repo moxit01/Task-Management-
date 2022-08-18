@@ -29,10 +29,16 @@ namespace TaskManagerLibrary
 
             var responseString = await response.Content.ReadAsStringAsync();
 
-            JObject jsonResult = response.Content.ReadAsAsync<JObject>().Result;
-            string auth0MgtToken = jsonResult.Value<string>("Authorization");
+            var headers = response.Headers;
 
-            return (status, responseString, auth0MgtToken);
+            IEnumerable<string> val;
+            if (headers.TryGetValues("Authorization", out val))
+            {
+                string auth0MgtToken = val.First();
+                return (status, responseString, auth0MgtToken);
+            }
+
+            return (404, responseString, "");
         }
 
         public static async Task<(int, String, string)> SignInRequest(Dictionary<string, string> values)
@@ -47,11 +53,16 @@ namespace TaskManagerLibrary
 
             var responseString = await response.Content.ReadAsStringAsync();
             var status = (int)response.StatusCode;
+            var headers = response.Headers;
 
-            JObject jsonResult = response.Content.ReadAsAsync<JObject>().Result;
-            string auth0MgtToken = jsonResult.Value<string>("Authorization");
+            IEnumerable<string> val;
+            if (headers.TryGetValues("Authorization", out val))
+            {
+                string auth0MgtToken = val.First();
+                return (status, responseString, auth0MgtToken);
+            }
 
-            return (status, responseString, auth0MgtToken);
+            return (404, responseString, "");
         }
 
         public static async Task<String> CreateProjectRequest(Dictionary<string, string> values)
@@ -71,15 +82,14 @@ namespace TaskManagerLibrary
             return responseString;
         }
 
-        public static async Task<String> GetUsers(Dictionary<string, string> values)
+        public static async Task<String> GetUsers(string token)
         {
-            string Serialized = JsonConvert.SerializeObject(values);
-
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpContent content = new StringContent(Serialized, Encoding.Unicode, "application/json");
 
-            var response = await client.PostAsync(Constants.GetUsers, content);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await client.GetAsync(Constants.GetUsers);
 
             var responseString = await response.Content.ReadAsStringAsync();
 
