@@ -1,6 +1,6 @@
 @page
 @model ProjectPages.Areas.Project.CreateModel
-
+@using ProjectPages.Areas.Identity.Pages.Account
 @{
     ViewData["Title"] = "Create";
 }
@@ -14,35 +14,47 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ProjectModel.Name" class="control-label"></label>
+                <label asp-for="ProjectModel.Name" class="control-label">Name</label>
             </div>
             <div class="form-group">
                 <input asp-for="ProjectModel.Name" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
                 <span asp-validation-for="ProjectModel.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectModel.Desc" class="control-label"></label>
+                <label asp-for="ProjectModel.Desc" class="control-label">Description</label>
             </div>
             <div class="form-group">
-                <input asp-for="ProjectModel.Desc" class="form-control" aria-required="true" style="font-size:18pt;height:300px;width:400px;"  />
+                <input asp-for="ProjectModel.Desc" class="form-control" aria-required="true" style="font-size:18pt;height:300px;width:400px;" />
                 <span asp-validation-for="ProjectModel.Desc" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectModel.StartDate" class="control-label"></label>
+                <label asp-for="ProjectModel.StartDate" class="control-label">Start Date</label>
             </div>
             <div class="form-group">
                 <input asp-for="ProjectModel.StartDate" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
                 <span asp-validation-for="ProjectModel.StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectModel.EndDate" class="control-label"></label>
+                <label asp-for="ProjectModel.EndDate" class="control-label">End Date</label>
             </div>
             <div class="form-group">
                 <input asp-for="ProjectModel.EndDate" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
                 <span asp-validation-for="ProjectModel.EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="ProjectModel.Users" class="control-label">Select employees</label>
+            </div>
+            <div class="form-group">
+                @{
+                    var options = new MultiSelectList(Model.users, "id", "Email");
+                    @Html.ListBoxFor(m => m.selectedUserIds, options)
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectModel.Users" class="control-label"></label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" tyle="font-size:18pt;height:40px;width:300px;" />
             </div>
         </form>
     </div>

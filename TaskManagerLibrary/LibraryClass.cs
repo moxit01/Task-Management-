@@ -65,7 +65,7 @@ namespace TaskManagerLibrary
             return (404, responseString, "");
         }
 
-        public static async Task<String> CreateProjectRequest(Dictionary<string, string> values)
+        public static async Task<(int, String)> CreateProjectRequest(Dictionary<string, object> values)
         {
             string Serialized = JsonConvert.SerializeObject(values);
 
@@ -74,12 +74,11 @@ namespace TaskManagerLibrary
             HttpContent content = new StringContent(Serialized, Encoding.Unicode, "application/json");
 
             var response = await client.PostAsync(Constants.CreateProjectAPI, content);
+            var status = (int)response.StatusCode;
 
             var responseString = await response.Content.ReadAsStringAsync();
 
-            Console.WriteLine(responseString);
-
-            return responseString;
+            return (status, responseString);
         }
 
         public static async Task<String> GetUsers(string token)

@@ -136,7 +136,7 @@ namespace TaskManagerAPI.Controllers
         [HttpGet("users")]
         public IActionResult GetUsers()
         {
-            var users = _context.Employees.Select(u => new { Id = u.Id, FullName = u.FullName });
+            var users = _context.Employees.Select(u => new { Id = u.Id, FullName = u.FullName, Email = u.Email });
 
             return Ok(new
             {
