@@ -21,6 +21,7 @@ using BookStoreAPI.Helpers;
 using System.Net;
 using TaskManagerLibrary.Models;
 using TaskManagerAPI.Data;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -131,6 +132,14 @@ namespace TaskManagerAPI.Controllers
             }
 
             return BadRequest();
+        }
+
+        [HttpGet("users")]
+        public IActionResult GetUsers()
+        {
+            var users = _context.Employees.Select(u => new { Id = u.Id, FullName = u.FullName });
+
+            return Ok(users);
         }
     }
 }

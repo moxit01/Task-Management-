@@ -54,22 +54,39 @@ namespace TaskManagerLibrary
             return (status, responseString, auth0MgtToken);
         }
 
-        //public static async Task<String> CreateProjectRequest(Dictionary<string, string> values)
-        //{
-        //    string Serialized = JsonConvert.SerializeObject(values);
+        public static async Task<String> CreateProjectRequest(Dictionary<string, string> values)
+        {
+            string Serialized = JsonConvert.SerializeObject(values);
 
-        //    client.DefaultRequestHeaders.Clear();
-        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        //    HttpContent content = new StringContent(Serialized, Encoding.Unicode, "application/json");
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpContent content = new StringContent(Serialized, Encoding.Unicode, "application/json");
 
-        //    //var response = await client.PostAsync(Constants.CreateProjectAPI, content);
+            var response = await client.PostAsync(Constants.CreateProjectAPI, content);
 
-        //    //var responseString = await response.Content.ReadAsStringAsync();
+            var responseString = await response.Content.ReadAsStringAsync();
 
-        //    //Console.WriteLine(responseString);
+            Console.WriteLine(responseString);
 
-        //    //return responseString;
-        //}
+            return responseString;
+        }
+
+        public static async Task<String> GetUsers(Dictionary<string, string> values)
+        {
+            string Serialized = JsonConvert.SerializeObject(values);
+
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpContent content = new StringContent(Serialized, Encoding.Unicode, "application/json");
+
+            var response = await client.PostAsync(Constants.GetUsers, content);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(responseString);
+
+            return responseString;
+        }
     }
 
 }
