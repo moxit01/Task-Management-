@@ -98,7 +98,9 @@ namespace ProjectPages.Areas.Project
 
             if (status == 200)
             {
-                return RedirectToPage("./Index");
+
+                return RedirectToPage("/Details", new { area = "Projects" });
+                //return RedirectToPage("./Index");
             }
 
             return Page();

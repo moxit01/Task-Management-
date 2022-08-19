@@ -5,64 +5,80 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 style="text-align:center">Create</h1>
 
-<h4>ProjectModel</h4>
+<h3 style="text-align:center" >ProjectModel</h3>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Name" class="control-label">Name</label>
-            </div>
-            <div class="form-group">
-                <input asp-for="Input.Name" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
-                <span asp-validation-for="ProjectModel.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Desc" class="control-label">Description</label>
-            </div>
-            <div class="form-group">
-                <input asp-for="Input.Desc" class="form-control" aria-required="true" style="font-size:18pt;height:300px;width:400px;" />
-                <span asp-validation-for="ProjectModel.Desc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.StartDate" class="control-label">Start Date</label>
-            </div>
-            <div class="form-group">
-                <input asp-for="Input.StartDate" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
-                <span asp-validation-for="ProjectModel.StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.EndDate" class="control-label">End Date</label>
-            </div>
-            <div class="form-group">
-                <input asp-for="Input.EndDate" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
-                <span asp-validation-for="Input.EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Users" class="control-label">Select employees</label>
-            </div>
-            <div class="form-group">
-                @{
-                    var options = new MultiSelectList(Model.users, "id", "Email");
-                    @Html.ListBoxFor(m => m.selectedUserIds, options)
-                }
-            </div>
-            <div class="form-group">
-                <label asp-for="ProjectModel.Users" class="control-label"></label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" tyle="font-size:18pt;height:40px;width:300px;" />
-            </div>
-        </form>
+        <section>
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Name" class="control-label">Name</label>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.Name" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
+                    <span asp-validation-for="ProjectModel.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Desc" class="control-label">Description</label>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.Desc" class="form-control" aria-required="true" style="font-size:18pt;height:300px;width:400px;" />
+                    <span asp-validation-for="ProjectModel.Desc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.StartDate" class="control-label">Start Date</label>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.StartDate" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
+                    <span asp-validation-for="ProjectModel.StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.EndDate" class="control-label">End Date</label>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.EndDate" class="form-control" aria-required="true" style="font-size:18pt;height:40px;width:400px;" />
+                    <span asp-validation-for="Input.EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Users" class="control-label">Select employees</label>
+                </div>
+                <div class="form-group">
+                    @{
+                        var options = new MultiSelectList(Model.users, "id", "Email");
+                        @Html.ListBoxFor(m => m.selectedUserIds, options)
+                    }
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProjectModel.Users" class="control-label"></label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" tyle="font-size:18pt;height:40px;width:300px;" />
+                </div>
+            </form>
+
+        </section>
     </div>
+
+
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <img src="https://i.postimg.cc/2y7TsJJM/task-management-image.jpgstyle=" width: 100%; height: auto;" />
+
+        </section>
+    </div>
+
+    <div>
+        <a asp-page="Index">Back to List</a>
+    </div>
+
+
+
+
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
