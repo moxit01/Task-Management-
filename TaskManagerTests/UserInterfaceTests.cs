@@ -54,4 +54,22 @@ public class UserInterfaceTests
     }
 
 
+    [TestMethod]
+    public void TestRegisterButton()
+    {
+        _driver.Navigate().GoToUrl("https://localhost:5001/Identity/Account/Register");
+        Assert.IsTrue(_driver.FindElement(By.Name("registerSubmit")).Displayed);
+
+        _driver.Quit();
+    }
+
+    [TestMethod]
+    public void TestSubmitButton()
+    {
+        _driver.Navigate().GoToUrl("https://localhost:5001/Identity/Account/Login");
+        Assert.IsTrue(_driver.FindElement(By.Id("login-submit")).Displayed);
+
+        _driver.Quit();
+    }
+
 }
