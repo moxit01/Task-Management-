@@ -18,5 +18,10 @@ Challenges faced/facing while implementation:
 3.Not able to resolve merge errors properly.
 -After the merging of the two individual working on the same project. It gave few conflict/ assembly reference error which gave issues for the other one. Had to modified the project again with changes. Created new pages and added more use into the project. Linking with api and database gave few errors which took time to resolve analysing the source of the problem. 
 
+4. Not able to create multiple selection list.
+- Tried using Select tag, html.listboxfor, html.dropdownlist, but nothing seem to work.
+
+5. Unable to get control objects of html in html.cs file.
+
 
 **Project is still in development phase** 
